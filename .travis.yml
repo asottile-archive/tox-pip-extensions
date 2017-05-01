@@ -9,7 +9,7 @@ matrix:
         -   env: TOXENV=pypy
 install: pip install coveralls tox
 script: tox
-after_success: coveralls
+after_success: TOP=. coveralls
 cache:
     directories:
         - $HOME/.cache/pip
