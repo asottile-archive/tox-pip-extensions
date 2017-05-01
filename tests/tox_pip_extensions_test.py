@@ -76,7 +76,7 @@ def indexserver(tmpdir_factory):
         sys.executable, '-m', 'pypiserver', '-p', str(port), pypi.strpath,
     ))
     try:
-        timeout = 5
+        timeout = 10
         timeout_time = time.time() + timeout
         while time.time() < timeout_time:
             try:
@@ -85,7 +85,7 @@ def indexserver(tmpdir_factory):
                 break
             except Exception:
                 print('not up yet')
-                time.sleep(.01)
+                time.sleep(.1)
         else:
             raise AssertionError('No pypi after {} seconds'.format(timeout))
         yield index_url
