@@ -47,3 +47,11 @@ These extensions can be used together, simply add both:
 tox_pip_extensions_ext_venv_update = true
 tox_pip_extensions_pip_custom_platform = true
 ```
+
+## Bootstrap requirements
+
+By default, `tox-pip-extensions` will intelligently choose what versions to
+install based on the plugins selected.
+
+If you'd like to pin specific versions, `tox-pip-extensions` will defer to a
+file named `requirements-bootstrap.txt` in the same directory as `tox.ini`.
