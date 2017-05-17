@@ -114,9 +114,10 @@ TOXINI = (
 )
 
 
-def _setup_py(in_tmpdir):
+def _setup_py(in_tmpdir, params=''):
     in_tmpdir.join('setup.py').write(
-        'import setuptools; setuptools.setup(name="test-pkg-please-ignore")',
+        'import setuptools\n'
+        'setuptools.setup(name="test-pkg-please-ignore",{})'.format(params),
     )
 
 
@@ -180,6 +181,22 @@ def test_venv_update_acceptance(in_tmpdir, indexserver, cache_dir):
     out = _tox()
     _assert_installed(out, 'cmod==2')
     _assert_not_installed(out, 'mccabe==0.6.0')
+
+
+def test_venv_update_updating_setup_py(in_tmpdir, indexserver, cache_dir):
+    _setup_py(in_tmpdir, params='install_requires=["cmod==1"]')
+    in_tmpdir.join('tox.ini').write(TOXINI.format(
+        indexserver=indexserver,
+        extensions='tox_pip_extensions_ext_venv_update = true',
+    ))
+    in_tmpdir.join('requirements.txt').write('')
+
+    out = _tox()
+    _assert_installed(out, 'cmod==1')
+
+    _setup_py(in_tmpdir, params='install_requires=["cmod==2"]')
+    out = _tox()
+    _assert_installed(out, 'cmod==2')
 
 
 def test_pip_custom_platform_acceptance(

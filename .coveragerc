@@ -6,7 +6,6 @@ data_file = $TOP/.coverage
 omit =
     .tox/*
     /usr/*
-    */tmp*
     setup.py
     # Don't complain if non-runnable code isn't run
     */__main__.py

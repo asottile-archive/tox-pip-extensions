@@ -16,7 +16,7 @@ VENV_UPDATE = 'venv_update'
 
 INSTALL_DEPS = {
     PIP_CUSTOM_PLATFORM: str('pip-custom-platform>=0.3.1'),
-    VENV_UPDATE: str('venv-update>=2.1'),
+    VENV_UPDATE: str('venv-update>=2.1.3'),
 }
 
 _INSTALL = ('install', '{opts}', '{packages}')
