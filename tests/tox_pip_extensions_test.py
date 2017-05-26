@@ -298,6 +298,19 @@ def test_skip_sdist(in_tmpdir, indexserver, cache_dir):
     assert _get_prune_line(out).endswith('--prune')
 
 
+def test_skip_install(in_tmpdir, indexserver, cache_dir):
+    _setup_py(in_tmpdir, params='install_requires=["cmod==2"]')
+    tox_contents = TOXINI.format(
+        indexserver=indexserver,
+        extensions='tox_pip_extensions_ext_venv_update = true',
+    ) + 'skip_install = true\n'
+    in_tmpdir.join('tox.ini').write(tox_contents)
+    in_tmpdir.join('requirements.txt').ensure()
+
+    out = _tox()
+    _assert_not_installed(out, 'cmod==2')
+
+
 def test_use_develop(in_tmpdir, indexserver, cache_dir):
     _setup_py(in_tmpdir)
     in_tmpdir.join('tox.ini').write(
