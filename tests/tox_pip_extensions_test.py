@@ -189,7 +189,7 @@ def test_venv_update_updating_setup_py(in_tmpdir, indexserver, cache_dir):
         indexserver=indexserver,
         extensions='tox_pip_extensions_ext_venv_update = true',
     ))
-    in_tmpdir.join('requirements.txt').write('')
+    in_tmpdir.join('requirements.txt').ensure()
 
     out = _tox()
     _assert_installed(out, 'cmod==1')
@@ -197,6 +197,19 @@ def test_venv_update_updating_setup_py(in_tmpdir, indexserver, cache_dir):
     _setup_py(in_tmpdir, params='install_requires=["cmod==2"]')
     out = _tox()
     _assert_installed(out, 'cmod==2')
+
+
+def test_venv_update_extras(in_tmpdir, indexserver, cache_dir):
+    _setup_py(in_tmpdir, params='extras_require={"extra1": ["cmod==1"]}')
+    tox_contents = TOXINI.format(
+        indexserver=indexserver,
+        extensions='tox_pip_extensions_ext_venv_update = true',
+    ) + 'extras = extra1\n'
+    in_tmpdir.join('tox.ini').write(tox_contents)
+    in_tmpdir.join('requirements.txt').ensure()
+
+    out = _tox()
+    _assert_installed(out, 'cmod==1')
 
 
 def test_pip_custom_platform_acceptance(

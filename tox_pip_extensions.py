@@ -128,10 +128,17 @@ def tox_runtest_pre(venv):
     install_command = list(venv.envconfig.install_command)
     if 'venv_update' in extensions:
         install_command.append('--prune')
+
+    def _extras(opt):
+        if venv.envconfig.extras:
+            return opt + '[{}]'.format(','.join(venv.envconfig.extras))
+        else:
+            return opt
+
     if venv.envconfig.usedevelop:
-        install_command.append('-e{}'.format(config.toxinidir))
+        install_command.append(_extras('-e{}'.format(config.toxinidir)))
     elif not config.skipsdist:
-        install_command.append(venv.session.get_installpkg_path())
+        install_command.append(_extras(venv.session.get_installpkg_path()))
 
     with _install_cmd(venv.envconfig, install_command):
         _install(venv, action, 'installdeps', venv._getresolvedeps())
