@@ -45,7 +45,7 @@ These extensions can be used together, simply add both:
 ```ini
 [tox]
 tox_pip_extensions_ext_venv_update = true
-tox_pip_extensions_pip_custom_platform = true
+tox_pip_extensions_ext_pip_custom_platform = true
 ```
 
 ## Bootstrap requirements
