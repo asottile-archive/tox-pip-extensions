@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/asottile/tox-pip-extensions.svg?branch=master)](https://travis-ci.org/asottile/tox-pip-extensions)
+[![Build Status](https://travis-ci.org/tox-dev/tox-pip-extensions.svg?branch=master)](https://travis-ci.org/tox-dev/tox-pip-extensions)
 [![Coverage Status](https://coveralls.io/repos/github/asottile/tox-pip-extensions/badge.svg?branch=master)](https://coveralls.io/github/asottile/tox-pip-extensions?branch=master)
 
 tox-pip-extensions

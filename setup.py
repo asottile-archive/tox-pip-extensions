@@ -7,7 +7,7 @@ setup(
         'Augment tox with different installation methods via progressive '
         'enhancement.'
     ),
-    url='https://github.com/asottile/tox-pip-extensions',
+    url='https://github.com/tox-dev/tox-pip-extensions',
     version='1.1.0',
 
     author='Anthony Sottile',
