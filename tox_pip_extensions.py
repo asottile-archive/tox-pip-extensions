@@ -57,7 +57,9 @@ def tox_configure(config):
         if bootstrap.exists():
             bootstrap_deps = (str('-r{}').format(bootstrap),)
         else:
-            bootstrap_deps = tuple(INSTALL_DEPS[ext] for ext in configured)
+            bootstrap_deps = [INSTALL_DEPS[ext] for ext in configured]
+            # venv-update has more restrictive dependencies, list it first
+            bootstrap_deps = tuple(reversed(bootstrap_deps))
 
         install_cmd = INSTALL_CMD[configured] + bootstrap_deps
         for k, cfg in config.envconfigs.items():

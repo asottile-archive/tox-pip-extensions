@@ -65,7 +65,7 @@ def _testing(pth):
 def indexserver(tmpdir_factory):
     pypi = tmpdir_factory.mktemp('indexserver').ensure_dir()
     _wheel('pip', pypi.strpath, ('pip-custom-platform', 'venv-update'))
-    _wheel('pip', pypi.strpath, ('venv-update==2.1.0', 'mccabe==0.6.0'))
+    _wheel('pip', pypi.strpath, ('venv-update==3.0.0', 'mccabe==0.6.0'))
     for pip in ('pip', 'pip_custom_platform.main'):
         for pkg in (_testing('cmod_v1'), _testing('cmod_v2')):
             _wheel(pip, pypi.strpath, (pkg,))
@@ -268,14 +268,14 @@ def test_honors_requirements_bootstrap(in_tmpdir, indexserver, cache_dir):
         indexserver=indexserver,
         extensions='tox_pip_extensions_ext_venv_update = true',
     ))
-    in_tmpdir.join('requirements-bootstrap.txt').write('venv-update==2.1.0')
+    in_tmpdir.join('requirements-bootstrap.txt').write('venv-update==3.0.0')
     requirements = in_tmpdir.join('requirements.txt')
 
     requirements.write('cmod==1')
     out = _tox()
     assert 'requirements-bootstrap.txt' in out
     _assert_installed(out, 'cmod==1')
-    _assert_installed(out, 'venv-update==2.1.0')
+    _assert_installed(out, 'venv-update==3.0.0')
 
 
 def test_skip_sdist(in_tmpdir, indexserver, cache_dir):
