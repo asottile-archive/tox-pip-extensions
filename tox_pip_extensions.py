@@ -5,10 +5,9 @@ from __future__ import unicode_literals
 import collections
 import contextlib
 
-import pluggy
 import six
+from tox import hookimpl
 
-hookimpl = pluggy.HookimplMarker("tox")
 
 TOX_KEY = 'tox_pip_extensions_ext_'
 
