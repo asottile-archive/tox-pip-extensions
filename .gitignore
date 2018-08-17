@@ -1,5 +1,5 @@
-/.cache
-/.coverage
-/*.egg-info
-/.tox
 *.pyc
+/*.egg-info
+/.coverage
+/.pytest_cache
+/.tox

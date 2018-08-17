@@ -24,7 +24,7 @@ _PCP = ('pip-custom-platform',) + _INSTALL
 _VU = ('pip-faster',) + _INSTALL
 _PCP_VU = ('pymonkey', 'pip-custom-platform', '--') + _VU
 
-VANILLA_PIP_INSTALL_CMD = ('pip',) + _INSTALL
+VANILLA_PIP_INSTALL_CMD = ('python', '-m', 'pip',) + _INSTALL
 
 INSTALL_CMD = {
     (PIP_CUSTOM_PLATFORM, VENV_UPDATE): _PCP_VU,
