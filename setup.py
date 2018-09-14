@@ -24,6 +24,6 @@ setup(
     ],
 
     py_modules=['tox_pip_extensions'],
-    install_requires=['six', 'tox>=3.2'],
+    install_requires=['six', 'tox>=3.3'],
     entry_points={'tox': ['pip_extensions = tox_pip_extensions']}
 )
