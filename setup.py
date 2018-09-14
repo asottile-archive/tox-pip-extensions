@@ -8,7 +8,7 @@ setup(
         'enhancement.'
     ),
     url='https://github.com/tox-dev/tox-pip-extensions',
-    version='1.3.0',
+    version='1.4.0',
 
     author='Anthony Sottile',
     author_email='asottile@umich.edu',
