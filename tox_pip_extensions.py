@@ -140,7 +140,7 @@ def tox_runtest_pre(venv):
     if venv.envconfig.usedevelop:
         install_command.append(_extras('-e{}'.format(config.toxinidir)))
     elif not config.skipsdist and not venv.envconfig.skip_install:
-        install_command.append(_extras(venv.session.get_installpkg_path()))
+        install_command.append(_extras(venv.package))
 
     with _install_cmd(venv.envconfig, install_command):
         _install(venv, action, 'installdeps', venv._getresolvedeps())
