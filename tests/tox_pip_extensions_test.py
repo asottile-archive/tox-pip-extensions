@@ -64,7 +64,7 @@ def _testing(pth):
 @pytest.fixture(scope='session')
 def indexserver(tmpdir_factory):
     pypi = tmpdir_factory.mktemp('indexserver').ensure_dir()
-    _wheel('pip', pypi.strpath, ('pip-custom-platform', 'venv-update'))
+    _wheel('pip', pypi.strpath, ('venv-update', 'pip-custom-platform'))
     _wheel('pip', pypi.strpath, ('venv-update==3.0.0', 'mccabe==0.6.0'))
     for pip in ('pip', 'pip_custom_platform.main'):
         for pkg in (_testing('cmod_v1'), _testing('cmod_v2')):
