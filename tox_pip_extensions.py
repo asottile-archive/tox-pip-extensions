@@ -45,7 +45,7 @@ def _assert_true_value(k, v):
 @hookimpl
 def tox_configure(config):
     cfg = six.moves.configparser.ConfigParser()
-    cfg.read(config.option.configfile)
+    cfg.read(str(config.toxinipath))
     configured = tuple(sorted(
         k[len(TOX_KEY):]
         for k, v in cfg.items('tox')
