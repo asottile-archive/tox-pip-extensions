@@ -108,7 +108,7 @@ def tox_testenv_install_deps(venv, action):
         return None
 
     _install_bootstrap(venv, action, bootstrap_deps)
-    _install(venv, action, 'installdeps', venv._getresolvedeps())
+    _install(venv, action, 'installdeps', venv.get_resolved_dependencies())
 
     # Indicate to the plugin framework that we have handled installation
     return True
@@ -143,7 +143,7 @@ def tox_runtest_pre(venv):
         install_command.append(_extras(venv.package))
 
     with _install_cmd(venv.envconfig, install_command):
-        _install(venv, action, 'installdeps', venv._getresolvedeps())
+        _install(venv, action, 'installdeps', venv.get_resolved_dependencies())
 
     # Show what we installed
     output = venv._pcall(
