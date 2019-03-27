@@ -100,7 +100,8 @@ def _install_bootstrap(venv, action, bootstrap_deps):
 
 @hookimpl(tryfirst=True)
 def tox_testenv_install_deps(venv, action):
-    extensions, bootstrap_deps = venv.envconfig.config.pip_extensions
+    config = venv.envconfig.config
+    extensions, bootstrap_deps = config.pip_extensions
 
     # If there's nothing special for us to do, defer to other plugins
     if not extensions:
@@ -115,7 +116,8 @@ def tox_testenv_install_deps(venv, action):
 
 @hookimpl
 def tox_runtest_pre(venv):
-    extensions, bootstrap_deps = venv.envconfig.config.pip_extensions
+    config = venv.envconfig.config
+    extensions, bootstrap_deps = config.pip_extensions
 
     # If there's nothing special for us to do, defer to other plugins
     if not extensions:
@@ -136,8 +138,8 @@ def tox_runtest_pre(venv):
             return opt
 
     if venv.envconfig.usedevelop:
-        install_command.append(_extras('-e{}'.format(venv.envconfig.config.toxinidir)))
-    elif not venv.envconfig.config.skipsdist and not venv.envconfig.skip_install:
+        install_command.append(_extras('-e{}'.format(config.toxinidir)))
+    elif not config.skipsdist and not venv.envconfig.skip_install:
         install_command.append(_extras(venv.package))
 
     with _install_cmd(venv.envconfig, install_command):
@@ -146,7 +148,7 @@ def tox_runtest_pre(venv):
     # Show what we installed
     output = venv._pcall(
         venv.envconfig.list_dependencies_command,
-        cwd=venv.envconfig.config.toxinidir,
+        cwd=config.toxinidir,
         action=action,
     ).split('\n\n')[-1]
     action.setactivity('installed', ','.join(output.splitlines()))
