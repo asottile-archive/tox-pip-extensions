@@ -100,7 +100,7 @@ def _install_bootstrap(venv, action, bootstrap_deps):
 
 @hookimpl(tryfirst=True)
 def tox_testenv_install_deps(venv, action):
-    config = venv.session.config
+    config = venv.envconfig.config
     extensions, bootstrap_deps = config.pip_extensions
 
     # If there's nothing special for us to do, defer to other plugins
@@ -116,14 +116,14 @@ def tox_testenv_install_deps(venv, action):
 
 @hookimpl
 def tox_runtest_pre(venv):
-    config = venv.session.config
+    config = venv.envconfig.config
     extensions, bootstrap_deps = config.pip_extensions
 
     # If there's nothing special for us to do, defer to other plugins
     if not extensions:
         return None
 
-    action = venv.session.newaction(venv, 'tox-pip-extensions')
+    action = venv.new_action('tox-pip-extensions')
 
     _install_bootstrap(venv, action, bootstrap_deps)
 
