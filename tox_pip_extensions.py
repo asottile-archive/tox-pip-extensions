@@ -58,7 +58,7 @@ def tox_configure(config):
     cfg.read(str(config.toxinipath))
     configured = tuple(sorted(
         k[len(TOX_KEY):]
-        for k, v in _get_tox_section()
+        for k, v in _get_tox_section(cfg)
         if k.startswith(TOX_KEY) and _assert_true_value(k, v)
     ))
     if configured:
