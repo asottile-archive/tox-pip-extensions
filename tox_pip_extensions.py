@@ -41,6 +41,16 @@ def _assert_true_value(k, v):
     else:
         raise ValueError('Expected "true" but got {} = {!r}'.format(k, v))
 
+def _get_tox_section(cfg):
+    exc_info = (None, None, None)
+    for section in ["tox:tox", "tox"]:
+        try:
+            return cfg.items(section)
+        except six.moves.configparser.NoSectionError:
+            exc_info = sys.exc_info()
+    six.reraise(*exc_info)
+
+
 
 @hookimpl
 def tox_configure(config):
@@ -48,7 +58,7 @@ def tox_configure(config):
     cfg.read(str(config.toxinipath))
     configured = tuple(sorted(
         k[len(TOX_KEY):]
-        for k, v in cfg.items('tox')
+        for k, v in _get_tox_section()
         if k.startswith(TOX_KEY) and _assert_true_value(k, v)
     ))
     if configured:
