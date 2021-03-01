@@ -1,3 +1,10 @@
+# DEPRECATED
+
+this plugin is deprecated without replacement, both of the underlying
+extensions are dead
+
+___
+
 [![Build Status](https://travis-ci.org/tox-dev/tox-pip-extensions.svg?branch=master)](https://travis-ci.org/tox-dev/tox-pip-extensions)
 [![Coverage Status](https://coveralls.io/repos/github/asottile/tox-pip-extensions/badge.svg?branch=master)](https://coveralls.io/github/asottile/tox-pip-extensions?branch=master)
 
